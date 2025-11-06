@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  frontend:
+    build: ./frontend
+    container_name: cashier_frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend/public:/usr/share/nginx/html
+    depends_on:
+      - backend
+    networks:
+      - cashier_network
+
+  backend:
+    build: ./backend
+    container_name: cashier_backend
+    ports:
+      - "8081:80"
+    volumes:
+      - ./backend/src:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - cashier_network
+
+  db:
+    image: mysql:8.0
+    container_name: cashier_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cashierdb
+      MYSQL_USER: cashier
+      MYSQL_PASSWORD: cashier123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+    networks:
+      - cashier_network
+
+networks:
+  cashier_network:
+
+volumes:
+  db_data:

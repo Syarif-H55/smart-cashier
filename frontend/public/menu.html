@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Smart Cashier</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Smart Cashier</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="menu.html" class="active">Menu</a>
+            <a href="pos.html">POS</a>
+            <button id="logoutBtn" class="btn-logout">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Restaurant Menu</h1>
+        <div class="category-tabs">
+            <button class="tab-btn active" data-category="all">All Items</button>
+            <button class="tab-btn" data-category="food">Food</button>
+            <button class="tab-btn" data-category="drink">Drinks</button>
+        </div>
+        
+        <div id="menuItems" class="menu-grid">
+            <!-- Menu items will be loaded here dynamically -->
+        </div>
+        
+        <div class="cart-summary">
+            <h3>Current Order</h3>
+            <div id="currentOrder"></div>
+            <div class="cart-total">
+                <strong>Total: $<span id="orderTotal">0.00</span></strong>
+            </div>
+            <a href="pos.html" class="btn">Proceed to POS</a>
+        </div>
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/menu.js"></script>
+</body>
+</html>

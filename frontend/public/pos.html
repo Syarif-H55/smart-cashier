@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS - Smart Cashier</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Smart Cashier</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="pos.html" class="active">POS</a>
+            <button id="logoutBtn" class="btn-logout">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Point of Sale</h1>
+        
+        <div class="pos-layout">
+            <div class="menu-section">
+                <h2>Menu Items</h2>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search menu items...">
+                </div>
+                <div id="posMenuItems" class="menu-grid small-grid">
+                    <!-- Menu items will be loaded here dynamically -->
+                </div>
+            </div>
+            
+            <div class="order-section">
+                <h2>Current Order</h2>
+                <div id="orderItems">
+                    <!-- Order items will be loaded here -->
+                </div>
+                
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span>$<span id="subtotal">0.00</span></span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (10%):</span>
+                        <span>$<span id="tax">0.00</span></span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total:</span>
+                        <span>$<span id="total">0.00</span></span>
+                    </div>
+                    
+                    <div class="payment-section">
+                        <h3>Payment Method</h3>
+                        <select id="paymentMethod">
+                            <option value="cash">Cash</option>
+                            <option value="card">Card</option>
+                            <option value="transfer">Transfer</option>
+                        </select>
+                        
+                        <div class="checkout-buttons">
+                            <button id="checkoutBtn" class="btn btn-checkout">Checkout</button>
+                            <button id="cancelOrderBtn" class="btn btn-cancel">Cancel Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/pos.js"></script>
+</body>
+</html>

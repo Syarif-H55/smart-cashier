@@ -1,48 +1,47 @@
-version: "3.9"
+version: '3.8'
+
 services:
+
   frontend:
     build: ./frontend
-    container_name: cashier_frontend
     ports:
       - "8080:80"
-    volumes:
-      - ./frontend/public:/usr/share/nginx/html
     depends_on:
       - backend
     networks:
-      - cashier_network
+      - cashier-network
 
   backend:
     build: ./backend
-    container_name: cashier_backend
     ports:
-      - "8081:80"
-    volumes:
-      - ./backend/src:/var/www/html
-    depends_on:
-      - db
-    networks:
-      - cashier_network
-
-  db:
-    image: mysql:8.0
-    container_name: cashier_db
-    restart: always
+      - "8000:80"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: cashierdb
-      MYSQL_USER: cashier
-      MYSQL_PASSWORD: cashier123
+      - DB_HOST=mysql
+      - DB_NAME=smart_cashier
+      - DB_USER=root
+      - DB_PASS=password
+    volumes:
+      - ./backend/src:/var/www/html/src
+    depends_on:
+      - mysql
+    networks:
+      - cashier-network
+
+  mysql:
+    build: ./database
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: smart_cashier
     ports:
       - "3306:3306"
     volumes:
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - db_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     networks:
-      - cashier_network
-
-networks:
-  cashier_network:
+      - cashier-network
 
 volumes:
-  db_data:
+  mysql_data:
+
+networks:
+  cashier-network:
+    driver: bridge
